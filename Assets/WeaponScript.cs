@@ -7,6 +7,7 @@ public class WeaponScript : MonoBehaviour
 {
     [SerializeField] Camera FPCamera;
     [SerializeField] float shootRange = 30f;
+    [SerializeField] ParticleSystem muzzleFlash;
     
     // Update is called once per frame
     void Update() {
@@ -15,7 +16,13 @@ public class WeaponScript : MonoBehaviour
         }
     }
 
+    private void PlayMuzzleFlash() {
+        muzzleFlash.Play();
+    }
+
     private void Shoot() {
+
+        PlayMuzzleFlash();
         RaycastHit hit;
 
         if (Physics.Raycast(FPCamera.transform.position, FPCamera.transform.forward, out hit, shootRange)) {
